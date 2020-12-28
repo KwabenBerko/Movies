@@ -28,13 +28,18 @@ class MyApp extends StatelessWidget {
         title: 'Movies App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            fontFamily: "Helvetica Neue",
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            appBarTheme: Theme.of(context)
-                .appBarTheme
-                .copyWith(brightness: Brightness.dark)),
-        home: HomeScreen(),
+          fontFamily: "Helvetica Neue",
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          appBarTheme: Theme.of(context)
+              .appBarTheme
+              .copyWith(brightness: Brightness.dark),
+        ),
+        initialRoute: "/",
+        routes: <String, WidgetBuilder>{
+          "/": (BuildContext context) => HomeScreen(),
+          "/details": (BuildContext context) => MovieDetailsScreen()
+        },
       ),
     );
   }

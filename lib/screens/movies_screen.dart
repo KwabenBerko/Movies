@@ -8,148 +8,116 @@ import 'package:flutter_bloc_basics_2/models/movie_model.dart';
 class MoviesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 50.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            padding: const EdgeInsets.only(left: 22.0, right: 22.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Movies",
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.w500),
+    return BlocBuilder<MoviesBloc, MoviesState>(
+      builder: (context, state) {
+        return Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(
+                height: 28.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 22.0, right: 22.0),
+                child: TextField(
+                  style: TextStyle(color: Colors.white, fontSize: 16.0),
+                  decoration: InputDecoration(
+                      isDense: true,
+                      hintText: "Search",
+                      hintStyle: const TextStyle(
+                        color: Color(0xFFC4C4C4),
+                        fontWeight: FontWeight.w600,
+                      ),
+                      suffixIcon: const Icon(
+                        Icons.search_rounded,
+                        color: Colors.white70,
+                        size: 24,
+                      ),
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                      ),
+                      contentPadding: const EdgeInsets.only(
+                        left: 15,
+                        right: 15,
+                        top: 12,
+                        bottom: 12,
+                      ),
+                      filled: true,
+                      fillColor: Color(0xFF2B2B2B)),
                 ),
-                CircleAvatar(
-                  radius: 14.0,
-                  backgroundImage:
-                      const AssetImage("assets/images/profile.jpg"),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 28.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 22.0, right: 22.0),
-            child: TextField(
-              style: TextStyle(color: Colors.white, fontSize: 16.0),
-              decoration: InputDecoration(
-                  isDense: true,
-                  hintText: "Search",
-                  hintStyle: const TextStyle(
-                    color: Color(0xFFC4C4C4),
-                    fontWeight: FontWeight.w600,
-                  ),
-                  suffixIcon: const Icon(
-                    Icons.search_rounded,
-                    color: Colors.white70,
-                    size: 24,
-                  ),
-                  // suffixIconConstraints: BoxConstraints(
-                  //   minWidth: 28,
-                  //   minHeight: 28,
-                  // ),
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ),
-                  contentPadding: const EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                    top: 12,
-                    bottom: 12,
-                  ),
-                  filled: true,
-                  fillColor: Color(0xFF2B2B2B)),
-            ),
-          ),
-          const SizedBox(
-            height: 25.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 22.0, right: 22.0),
-            child: Row(
-              children: [
-                Text(
-                  "In theatre",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w600),
-                )
-              ],
-            ),
-          ),
-          BlocConsumer<MoviesBloc, MoviesState>(listener: (context, state) {
-            context.read<MoviesBloc>();
-          }, builder: (context, moviesState) {
-            return Container(
-              height: 240,
-              child: moviesState is LoadedMovies
-                  ? ListView.builder(
-                      padding: EdgeInsets.only(top: 12.0, left: 20.0),
-                      itemCount: moviesState.inThreatre.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext content, int index) {
-                        final movie = moviesState.inThreatre[index];
-                        return buildMovieInTheatre(context, movie);
-                      },
+              ),
+              const SizedBox(
+                height: 25.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 22.0, right: 22.0),
+                child: Row(
+                  children: [
+                    Text(
+                      "In theatre",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w600),
                     )
-                  : SizedBox.shrink(),
-            );
-          }),
-          SizedBox(
-            height: 25,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 22.0, right: 22.0),
-            child: Row(
-              children: [
-                Text(
-                  "Trending",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w600),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Expanded(
-            child: BlocConsumer<MoviesBloc, MoviesState>(
-              listener: (context, _) {
-                return context.read<MoviesBloc>();
-              },
-              builder: (context, moviesState) {
-                return Container(
+                  ],
+                ),
+              ),
+              Container(
+                height: 240,
+                child: state is LoadedMovies
+                    ? ListView.builder(
+                        padding: EdgeInsets.only(top: 12.0, left: 20.0),
+                        itemCount: state.inThreatre.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext content, int index) {
+                          final movie = state.inThreatre[index];
+                          return buildMovieInTheatre(context, movie);
+                        },
+                      )
+                    : SizedBox.shrink(),
+              ),
+              SizedBox(
+                height: 18,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 22.0, right: 22.0),
+                child: Row(
+                  children: [
+                    Text(
+                      "Trending",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Expanded(
+                child: Container(
                   padding: const EdgeInsets.only(left: 22.0, right: 22.0),
-                  child: moviesState is LoadedMovies
+                  child: state is LoadedMovies
                       ? ListView.builder(
-                          itemCount: moviesState.trending.length,
+                          itemCount: state.trending.length,
                           scrollDirection: Axis.vertical,
                           padding: EdgeInsets.zero,
                           itemBuilder: (BuildContext context, int index) {
                             return buildTrendingMovie(
-                                context, moviesState.trending[index]);
+                                context, state.trending[index]);
                           },
                         )
                       : SizedBox.shrink(),
-                );
-              },
-            ),
-          )
-        ],
-      ),
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -263,9 +231,10 @@ String getFirstThreeCastMembers(List<Actor> cast) {
 
 buildMovieInTheatre(BuildContext context, Movie movie) {
   return GestureDetector(
-    onTap: () => print(
-      "Movie With Title ${movie.title} Clicked.",
-    ),
+    onTap: () {
+      print("Movie With Title ${movie.title} Clicked!");
+      Navigator.of(context).pushNamed("/details");
+    },
     child: Container(
       padding: EdgeInsets.only(right: 20.0),
       child: ClipRRect(

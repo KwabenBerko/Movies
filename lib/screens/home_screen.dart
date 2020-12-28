@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_basics_2/screens/screens.dart';
+import 'package:flutter_bloc_basics_2/widgets/top_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -30,6 +31,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       backgroundColor: Color(0xFF0B0B0C),
+      appBar: TopBar(),
       body: MoviesScreen(),
     );
   }
