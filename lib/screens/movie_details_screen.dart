@@ -80,22 +80,33 @@ class MovieDetailsScreen extends StatelessWidget {
                     SizedBox(
                       height: 18.0,
                     ),
-                    Container(
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      width: double.infinity,
-                      height: 50.0,
-                      child: FlatButton(
-                        onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        color: Color(0xFFEC1F41),
-                        child: Text(
-                          "Add to watch list",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                      child: Container(
+                        width: double.infinity,
+                        height: 50.0,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0xFFFF0000).withAlpha(100),
+                                blurRadius: 8.0,
+                                spreadRadius: 4.0,
+                              )
+                            ]),
+                        child: FlatButton(
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          color: Color(0xFFEC1F41),
+                          child: Text(
+                            "Add to watch list",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ),
