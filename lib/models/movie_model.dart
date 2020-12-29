@@ -33,4 +33,15 @@ class Movie extends Equatable {
 
   @override
   bool get stringify => true;
+
+  String getFirstThreeCastMembers() {
+    final result = StringBuffer();
+    for (var i = 0; i < cast.sublist(0, 3).length; i++) {
+      result.write(cast[i].name);
+      if (i < 2) {
+        result.write(", ");
+      }
+    }
+    return result.toString();
+  }
 }

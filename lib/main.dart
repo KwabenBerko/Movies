@@ -35,11 +35,7 @@ class MyApp extends StatelessWidget {
               .appBarTheme
               .copyWith(brightness: Brightness.dark),
         ),
-        initialRoute: "/",
-        routes: <String, WidgetBuilder>{
-          "/": (BuildContext context) => HomeScreen(),
-          "/details": (BuildContext context) => MovieDetailsScreen()
-        },
+        home: HomeScreen(),
       ),
     );
   }
