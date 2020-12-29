@@ -4,7 +4,7 @@ import 'package:flutter_bloc_basics_2/screens/screens.dart';
 import 'package:flutter_bloc_basics_2/widgets/top_bar.dart';
 
 class HomeScreen extends StatelessWidget {
-  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
+  final _navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +49,10 @@ class HomeScreen extends StatelessWidget {
                 return MaterialPageRoute(builder: (_) => MoviesScreen());
               default:
                 return MaterialPageRoute(
-                    builder: (_) => MovieDetailsScreen(
-                          movie: settings.arguments as Movie,
-                        ));
+                  builder: (_) => MovieDetailsScreen(
+                    movie: settings.arguments as Movie,
+                  ),
+                );
             }
           },
         ),

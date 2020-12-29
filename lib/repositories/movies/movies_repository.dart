@@ -18,7 +18,7 @@ class MoviesRepository extends BaseMoviesRepository {
 
   @override
   Stream<List<Movie>> streamMovies() async* {
-    final response = await _httpClient.get("https://jsonkeeper.com/b/TKHU");
+    final response = await _httpClient.get("https://jsonkeeper.com/b/QJQY");
     if (response.statusCode != 200) {
       yield* Stream.empty();
     } else {
@@ -30,6 +30,7 @@ class MoviesRepository extends BaseMoviesRepository {
                 ? (movie["rating"] as int).toDouble()
                 : movie["rating"],
             posterUrl: movie["poster_url"],
+            trailerUrl: movie["trailer_url"],
             releaseDate: movie["release_date"],
             synopsis: movie["synopsis"],
             cast: (movie["cast"] as List)

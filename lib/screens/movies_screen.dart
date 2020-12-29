@@ -8,7 +8,7 @@ import 'package:flutter_bloc_basics_2/screens/widgets/theatre_movie_widget.dart'
 import 'package:flutter_bloc_basics_2/screens/widgets/trending_movie_widget.dart';
 
 class MoviesScreen extends StatelessWidget {
-  static const String routeName = "/movies";
+  static const String routeName = "/";
 
   @override
   Widget build(BuildContext context) {

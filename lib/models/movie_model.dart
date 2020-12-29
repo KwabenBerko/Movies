@@ -6,6 +6,7 @@ class Movie extends Equatable {
   final String title;
   final double rating;
   final String posterUrl;
+  final String trailerUrl;
   final int releaseDate;
   final String synopsis;
   final List<Actor> cast;
@@ -15,6 +16,7 @@ class Movie extends Equatable {
     @required this.title,
     @required this.rating,
     @required this.posterUrl,
+    @required this.trailerUrl,
     @required this.releaseDate,
     @required this.synopsis,
     @required this.cast,
@@ -26,6 +28,7 @@ class Movie extends Equatable {
         title,
         rating,
         posterUrl,
+        trailerUrl,
         releaseDate,
         synopsis,
         cast,
