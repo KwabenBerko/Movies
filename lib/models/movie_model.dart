@@ -10,6 +10,7 @@ class Movie extends Equatable {
   final int releaseDate;
   final String synopsis;
   final List<Actor> cast;
+  final List<Comment> comments;
   final bool isTrending;
 
   Movie({
@@ -20,6 +21,7 @@ class Movie extends Equatable {
     @required this.releaseDate,
     @required this.synopsis,
     @required this.cast,
+    @required this.comments,
     this.isTrending = false,
   });
 
@@ -32,6 +34,7 @@ class Movie extends Equatable {
         releaseDate,
         synopsis,
         cast,
+        comments
       ];
 
   @override

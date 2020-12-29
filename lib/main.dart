@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         title: 'Movies App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          fontFamily: "Helvetica Neue",
+          fontFamily: "Verdana",
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: Theme.of(context)

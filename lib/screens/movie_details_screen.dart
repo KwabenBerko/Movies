@@ -3,6 +3,7 @@ import 'package:flutter_bloc_basics_2/models/models.dart';
 import 'package:flutter_bloc_basics_2/screens/widgets/movie_poster_widget.dart';
 import 'package:flutter_bloc_basics_2/screens/widgets/movie_ratings_widget.dart';
 import 'package:flutter_bloc_basics_2/screens/widgets/movie_title_widget.dart';
+import 'package:intl/intl.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   static const String routeName = "/detail";
@@ -21,7 +22,7 @@ class MovieDetailsScreen extends StatelessWidget {
             ? const SizedBox.shrink()
             : SingleChildScrollView(
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(12.0, 28.0, 12.0, 0.0),
+                  padding: EdgeInsets.fromLTRB(12.0, 25.0, 12.0, 12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -115,7 +116,7 @@ class MovieDetailsScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 30.0,
+                        height: 24.0,
                       ),
                       Text(
                         "Watch trailer",
@@ -156,11 +157,94 @@ class MovieDetailsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                      ),
+                      Container(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: _movie.comments.length,
+                          itemBuilder: (context, index) =>
+                              _buildCommentListItem(_movie.comments[index]),
+                        ),
                       )
                     ],
                   ),
                 ),
               ));
+  }
+
+  _buildCommentListItem(Comment comment) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Color(0xFF111111),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 15.0,
+                        backgroundImage:
+                            NetworkImage(comment.commenter.imageUrl),
+                      ),
+                      SizedBox(
+                        width: 12.0,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            comment.commenter.name,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 3.0,
+                          ),
+                          Text(
+                            DateFormat("MMM yyyy").format(comment.createdAt),
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 11.0,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  Icon(
+                    Icons.more_vert_rounded,
+                    color: Colors.grey[200],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 13.0,
+              ),
+              Text(
+                comment.text,
+                style: TextStyle(
+                  color: Color(0xFF8F9B99),
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w600,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   String _getVideoId(String youtubeUrl) {
